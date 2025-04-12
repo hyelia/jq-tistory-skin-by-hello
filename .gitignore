@@ -1,7 +1,15 @@
-.idea
+/.idea
 node_modules
 dist
 tidory.config.js
+/.DS_Store
+/.github
+.editorconfig
+.vscode
+.history/
+.env
+.env.local
+
 
 # Private Submodules
 packages/portfolio

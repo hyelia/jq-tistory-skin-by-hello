@@ -1,12 +1,17 @@
-const ESLintPlugin = require('eslint-webpack-plugin')
+const ESLintPlugin = require("eslint-webpack-plugin");
+
+require("dotenv").config({ path: ".env.local" });
+console.log("🔥 TISTORY_BLOG:", process.env.TISTORY_BLOG);
 
 /**
  * Tidory Configuration
  * @see https://tidory.github.io/docs/configuration/
  */
 module.exports = {
-  ts_session: '',
-  url: '',
+  ts_session: process.env.TISTORY_SESSION,
+  entry: "./index.pug",
+  output: "./dist",
+  url: process.env.TISTORY_BLOG,
 
   preview: {
     /**
@@ -15,7 +20,7 @@ module.exports = {
      * NONE
      * COVER
      */
-    homeType: 'NONE',
+    homeType: "NONE",
 
     /**
      * Preview Mode
@@ -26,7 +31,7 @@ module.exports = {
      * tag
      * guestbook
      */
-    mode: 'index',
+    mode: "index",
 
     /**
      * Skin Settings
@@ -34,12 +39,12 @@ module.exports = {
      * @see https://tistory.github.io/document-tistory-skin/common/index.xml.html
      */
     skinSettings: {
-      liststyle: 'list',
+      liststyle: "list",
       recentEntries: 5,
       recentComments: 5,
       lengthOfRecentNotice: 32,
       lengthOfRecentEntry: 32,
-      lengthOfRecentComment: 32
+      lengthOfRecentComment: 32,
     },
 
     /**
@@ -47,13 +52,13 @@ module.exports = {
      */
     variableSettings: {
       sidebar: false,
-      'foldable-category': true,
-      width: '720',
+      "foldable-category": true,
+      width: "720",
       toc: true,
       scrollspy: true,
-      hljs: 'xcode',
-      'hljs-dark': 'vs2015',
-      'header-style': 'simple'
+      hljs: "xcode",
+      "hljs-dark": "vs2015",
+      "header-style": "simple",
     },
 
     /**
@@ -61,55 +66,55 @@ module.exports = {
      */
     coverSettings: [
       {
-        description: '슬라이더',
+        description: "슬라이더",
         index: 0,
-        name: 'slider',
-        title: '슬라이더',
-        dataType: 'RECENT',
+        name: "slider",
+        title: "슬라이더",
+        dataType: "RECENT",
         data: {
-          category: 'ALL',
-          size: '5'
-        }
+          category: "ALL",
+          size: "5",
+        },
       },
       {
-        description: '리스트',
+        description: "리스트",
         index: 0,
-        name: 'list',
-        title: '리스트',
-        dataType: 'RECENT',
+        name: "list",
+        title: "리스트",
+        dataType: "RECENT",
         data: {
-          category: 'ALL',
-          size: '5'
-        }
+          category: "ALL",
+          size: "5",
+        },
       },
       {
-        description: '그리드',
+        description: "그리드",
         index: 0,
-        name: 'grid',
-        title: '그리드',
-        dataType: 'RECENT',
+        name: "grid",
+        title: "그리드",
+        dataType: "RECENT",
         data: {
-          category: 'ALL',
-          size: '5'
-        }
+          category: "ALL",
+          size: "5",
+        },
       },
       {
-        description: 'Z',
+        description: "Z",
         index: 0,
-        name: 'Z',
-        title: 'Z',
-        dataType: 'RECENT',
+        name: "Z",
+        title: "Z",
+        dataType: "RECENT",
         data: {
-          category: 'ALL',
-          size: '5'
-        }
-      }
-    ]
+          category: "ALL",
+          size: "5",
+        },
+      },
+    ],
   },
 
   alias: {
-    '@': 'assets',
-    '~views': 'views'
+    "@": "assets",
+    "~views": "views",
   },
 
   /**
@@ -117,15 +122,15 @@ module.exports = {
    *
    * @param {object} webpackConfig
    */
-  extends (webpackConfig) {
+  extends(webpackConfig) {
     webpackConfig.plugins = [
-      new ESLintPlugin({ configType: 'flat' }),
-      ...webpackConfig.plugins
-    ]
+      new ESLintPlugin({ configType: "flat" }),
+      ...webpackConfig.plugins,
+    ];
 
     webpackConfig.entry = Object.assign(webpackConfig.entry, {
-      app: './assets/js/app.js',
-      vendor: './assets/js/vendor.js'
-    })
-  }
-}
+      app: "./assets/js/app.js",
+      vendor: "./assets/js/vendor.js",
+    });
+  },
+};
